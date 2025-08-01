@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package company.v1;
+
+option go_package = "github.com/saas-microcourses-management/proto/gen/company/v1;companyv1";
+
+import "google/protobuf/timestamp.proto";
+// import "common/v1/common.proto"; // TODO: Fix import path
+
+message Company {
+  string id = 1;  // UUID as string
+  string name = 2;
+  string subscription_plan = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message CreateCompanyRequest {
+  string name = 1;
+  string subscription_plan = 2;
+}
+
+message CreateCompanyResponse {
+  Company company = 1;
+}
+
+message GetCompanyRequest {
+  string id = 1;  // UUID as string
+}
+
+message GetCompanyResponse {
+  Company company = 1;
+}
+
+message UpdateCompanyRequest {
+  string id = 1;  // UUID as string
+  optional string name = 2;
+  optional string subscription_plan = 3;
+}
+
+message UpdateCompanyResponse {
+  Company company = 1;
+}
+
+message DeleteCompanyRequest {
+  string id = 1;  // UUID as string
+}
+
+message DeleteCompanyResponse {
+  bool success = 1;
+}
+
+message ListCompaniesRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListCompaniesResponse {
+  repeated Company companies = 1;
+  int32 total = 2;
+  // common.v1.PaginationInfo pagination = 3; // TODO: Add back when import is fixed
+}
+
+service CompanyService {
+  rpc CreateCompany(CreateCompanyRequest) returns (CreateCompanyResponse);
+  rpc GetCompany(GetCompanyRequest) returns (GetCompanyResponse);
+  rpc UpdateCompany(UpdateCompanyRequest) returns (UpdateCompanyResponse);
+  rpc DeleteCompany(DeleteCompanyRequest) returns (DeleteCompanyResponse);
+  rpc ListCompanies(ListCompaniesRequest) returns (ListCompaniesResponse);
+}

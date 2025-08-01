@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package common.v1;
+
+option go_package = "github.com/saas-microcourses-management/proto/gen/common/v1;commonv1";
+
+import "google/protobuf/timestamp.proto";
+
+// Standard error response
+message Error {
+  string code = 1;
+  string message = 2;
+  map<string, string> details = 3;
+}
+
+// Pagination information
+message PaginationInfo {
+  int32 current_page = 1;
+  int32 per_page = 2;
+  int32 total_pages = 3;
+  int32 total_items = 4;
+  bool has_next = 5;
+  bool has_previous = 6;
+}
+
+// Standard timestamp fields for entities
+message TimestampFields {
+  google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp updated_at = 2;
+}
+
+// Status enum for various entities
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_ACTIVE = 1;
+  STATUS_INACTIVE = 2;
+  STATUS_SUSPENDED = 3;
+  STATUS_DELETED = 4;
+}

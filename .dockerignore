@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Environment files
+.env
+.env.local
+.env.example
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+server
+*.exe
+
+# Buf lock file (will be regenerated)
+buf.lock
+
+# Logs
+*.log
+
+# Test files
+*_test.go
+testdata/
+
+# Temporary files
+tmp/
+temp/
