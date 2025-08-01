@@ -48,7 +48,7 @@ To add a new service (e.g., `course`):
    ```protobuf
    syntax = "proto3";
    package course.v1;
-   option go_package = "github.com/saas-microcourses-management/proto/gen/course/v1;coursev1";
+   option go_package = "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/course/v1;coursev1";
    ```
 4. Run: `buf generate`
 
@@ -74,11 +74,11 @@ Update your Go imports to use the new generated paths:
 
 ```go
 // Company service
-import companyv1 "github.com/saas-microcourses-management/proto/gen/proto/company/v1"
+import companyv1 "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/company/v1"
 
 // User service  
-import userv1 "github.com/saas-microcourses-management/proto/gen/proto/user/v1"
+import userv1 "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/user/v1"
 
 // Common types
-import commonv1 "github.com/saas-microcourses-management/proto/gen/proto/common/v1"
+import commonv1 "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/common/v1"
 ```

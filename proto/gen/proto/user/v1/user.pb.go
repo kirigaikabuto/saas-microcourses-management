@@ -654,8 +654,8 @@ const file_proto_user_v1_user_proto_rawDesc = "" +
 	"UpdateUser\x12\x1a.user.v1.UpdateUserRequest\x1a\x1b.user.v1.UpdateUserResponse\x12E\n" +
 	"\n" +
 	"DeleteUser\x12\x1a.user.v1.DeleteUserRequest\x1a\x1b.user.v1.DeleteUserResponse\x12B\n" +
-	"\tListUsers\x12\x19.user.v1.ListUsersRequest\x1a\x1a.user.v1.ListUsersResponseB\x9d\x01\n" +
-	"\vcom.user.v1B\tUserProtoP\x01ZFgithub.com/saas-microcourses-management/proto/gen/proto/user/v1;userv1\xa2\x02\x03UXX\xaa\x02\aUser.V1\xca\x02\aUser\\V1\xe2\x02\x13User\\V1\\GPBMetadata\xea\x02\bUser::V1b\x06proto3"
+	"\tListUsers\x12\x19.user.v1.ListUsersRequest\x1a\x1a.user.v1.ListUsersResponseB\xab\x01\n" +
+	"\vcom.user.v1B\tUserProtoP\x01ZTgithub.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/user/v1;userv1\xa2\x02\x03UXX\xaa\x02\aUser.V1\xca\x02\aUser\\V1\xe2\x02\x13User\\V1\\GPBMetadata\xea\x02\bUser::V1b\x06proto3"
 
 var (
 	file_proto_user_v1_user_proto_rawDescOnce sync.Once

@@ -308,8 +308,8 @@ const file_proto_common_v1_common_proto_rawDesc = "" +
 	"\rSTATUS_ACTIVE\x10\x01\x12\x13\n" +
 	"\x0fSTATUS_INACTIVE\x10\x02\x12\x14\n" +
 	"\x10STATUS_SUSPENDED\x10\x03\x12\x12\n" +
-	"\x0eSTATUS_DELETED\x10\x04B\xad\x01\n" +
-	"\rcom.common.v1B\vCommonProtoP\x01ZJgithub.com/saas-microcourses-management/proto/gen/proto/common/v1;commonv1\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
+	"\x0eSTATUS_DELETED\x10\x04B\xbb\x01\n" +
+	"\rcom.common.v1B\vCommonProtoP\x01ZXgithub.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/common/v1;commonv1\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
 var (

@@ -625,8 +625,8 @@ const file_proto_company_v1_company_proto_rawDesc = "" +
 	"GetCompany\x12\x1d.company.v1.GetCompanyRequest\x1a\x1e.company.v1.GetCompanyResponse\x12T\n" +
 	"\rUpdateCompany\x12 .company.v1.UpdateCompanyRequest\x1a!.company.v1.UpdateCompanyResponse\x12T\n" +
 	"\rDeleteCompany\x12 .company.v1.DeleteCompanyRequest\x1a!.company.v1.DeleteCompanyResponse\x12T\n" +
-	"\rListCompanies\x12 .company.v1.ListCompaniesRequest\x1a!.company.v1.ListCompaniesResponseB\xb5\x01\n" +
-	"\x0ecom.company.v1B\fCompanyProtoP\x01ZLgithub.com/saas-microcourses-management/proto/gen/proto/company/v1;companyv1\xa2\x02\x03CXX\xaa\x02\n" +
+	"\rListCompanies\x12 .company.v1.ListCompaniesRequest\x1a!.company.v1.ListCompaniesResponseB\xc3\x01\n" +
+	"\x0ecom.company.v1B\fCompanyProtoP\x01ZZgithub.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/company/v1;companyv1\xa2\x02\x03CXX\xaa\x02\n" +
 	"Company.V1\xca\x02\n" +
 	"Company\\V1\xe2\x02\x16Company\\V1\\GPBMetadata\xea\x02\vCompany::V1b\x06proto3"
 

@@ -4,13 +4,13 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/saas-microcourses-management/internal/helper"
+	"github.com/kirigaikabuto/saas-microcourses-management/internal/helper"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/saas-microcourses-management/internal/db"
-	companyv1 "github.com/saas-microcourses-management/proto/gen/proto/company/v1"
+	"github.com/kirigaikabuto/saas-microcourses-management/internal/db"
+	companyv1 "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/company/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

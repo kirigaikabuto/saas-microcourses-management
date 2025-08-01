@@ -2,8 +2,8 @@ package helper
 
 import (
 	"github.com/google/uuid"
-	"github.com/saas-microcourses-management/internal/db"
-	companyv1 "github.com/saas-microcourses-management/proto/gen/proto/company/v1"
+	"github.com/kirigaikabuto/saas-microcourses-management/internal/db"
+	companyv1 "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/company/v1"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

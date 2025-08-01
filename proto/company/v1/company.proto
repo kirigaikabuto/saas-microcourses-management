@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package company.v1;
 
-option go_package = "github.com/saas-microcourses-management/proto/gen/company/v1;companyv1";
+option go_package = "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/company/v1;companyv1";
 
 import "google/protobuf/timestamp.proto";
 // import "common/v1/common.proto"; // TODO: Fix import path

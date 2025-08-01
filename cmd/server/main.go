@@ -9,8 +9,8 @@ import (
 	"syscall"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/saas-microcourses-management/internal/service"
-	companyv1 "github.com/saas-microcourses-management/proto/gen/proto/company/v1"
+	"github.com/kirigaikabuto/saas-microcourses-management/internal/service"
+	companyv1 "github.com/kirigaikabuto/saas-microcourses-management/proto/gen/proto/company/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
