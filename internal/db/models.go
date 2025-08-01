@@ -9,9 +9,17 @@ import (
 )
 
 type Company struct {
-	ID               pgtype.UUID        `json:"id"`
-	Name             pgtype.Text        `json:"name"`
-	SubscriptionPlan pgtype.Text        `json:"subscription_plan"`
-	CreatedAt        pgtype.Timestamptz `json:"created_at"`
-	UpdatedAt        pgtype.Timestamptz `json:"updated_at"`
+	ID               pgtype.UUID      `json:"id"`
+	Name             pgtype.Text      `json:"name"`
+	SubscriptionPlan pgtype.Text      `json:"subscription_plan"`
+	CreatedAt        pgtype.Timestamp `json:"created_at"`
+	UpdatedAt        pgtype.Timestamp `json:"updated_at"`
+}
+
+type User struct {
+	ID        pgtype.UUID      `json:"id"`
+	Auth0ID   string           `json:"auth0_id"`
+	Email     string           `json:"email"`
+	Name      pgtype.Text      `json:"name"`
+	CreatedAt pgtype.Timestamp `json:"created_at"`
 }

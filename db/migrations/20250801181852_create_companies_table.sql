@@ -14,11 +14,11 @@ $$ language 'plpgsql';
 
 -- Create companies table with UUID primary key
 CREATE TABLE companies (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY,
     name VARCHAR(255),
     subscription_plan VARCHAR(100),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 
 -- Create trigger for updated_at

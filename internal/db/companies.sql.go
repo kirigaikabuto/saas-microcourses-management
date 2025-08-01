@@ -12,7 +12,8 @@ import (
 )
 
 const countCompanies = `-- name: CountCompanies :one
-SELECT COUNT(*) FROM companies
+SELECT COUNT(*)
+FROM companies
 `
 
 func (q *Queries) CountCompanies(ctx context.Context) (int64, error) {
@@ -23,18 +24,19 @@ func (q *Queries) CountCompanies(ctx context.Context) (int64, error) {
 }
 
 const createCompany = `-- name: CreateCompany :one
-INSERT INTO companies (name, subscription_plan)
-VALUES ($1, $2)
+INSERT INTO companies (id, name, subscription_plan, created_at, updated_at)
+VALUES ($1, $2, $3, NOW(), NOW())
 RETURNING id, name, subscription_plan, created_at, updated_at
 `
 
 type CreateCompanyParams struct {
+	ID               pgtype.UUID `json:"id"`
 	Name             pgtype.Text `json:"name"`
 	SubscriptionPlan pgtype.Text `json:"subscription_plan"`
 }
 
 func (q *Queries) CreateCompany(ctx context.Context, arg CreateCompanyParams) (Company, error) {
-	row := q.db.QueryRow(ctx, createCompany, arg.Name, arg.SubscriptionPlan)
+	row := q.db.QueryRow(ctx, createCompany, arg.ID, arg.Name, arg.SubscriptionPlan)
 	var i Company
 	err := row.Scan(
 		&i.ID,
@@ -47,7 +49,8 @@ func (q *Queries) CreateCompany(ctx context.Context, arg CreateCompanyParams) (C
 }
 
 const deleteCompany = `-- name: DeleteCompany :exec
-DELETE FROM companies
+DELETE
+FROM companies
 WHERE id = $1
 `
 
@@ -115,10 +118,9 @@ func (q *Queries) ListCompanies(ctx context.Context, arg ListCompaniesParams) ([
 
 const updateCompany = `-- name: UpdateCompany :one
 UPDATE companies
-SET
-    name = COALESCE($2, name),
+SET name              = COALESCE($2, name),
     subscription_plan = COALESCE($3, subscription_plan),
-    updated_at = NOW()
+    updated_at        = NOW()
 WHERE id = $1
 RETURNING id, name, subscription_plan, created_at, updated_at
 `

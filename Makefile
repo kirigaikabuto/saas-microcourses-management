@@ -1,4 +1,4 @@
-.PHONY: help proto buf-generate buf-lint buf-format buf-breaking sqlc run build docker-build docker-up docker-down docker-logs deps migrate-up migrate-down migrate-status migrate-new migrate-reset seed seed-clear
+.PHONY: help proto buf-generate buf-lint buf-format buf-breaking sqlc run build docker-build docker-up docker-down docker-logs deps migrate-up migrate-down migrate-status migrate-new migrate-reset
 
 # Default target
 help:
@@ -18,8 +18,6 @@ help:
 	@echo "    migrate-status   Show migration status"
 	@echo "    migrate-new      Create new migration (usage: make migrate-new name=migration_name)"
 	@echo "    migrate-reset    Reset database (rollback all, then apply all)"
-	@echo "    seed             Seed database with sample companies"
-	@echo "    seed-clear       Clear seed data from database"
 	@echo ""
 	@echo "  Development:"
 	@echo "    run              Run the server locally"
@@ -109,12 +107,3 @@ migrate-new:
 
 migrate-reset:
 	$(DBMATE) down && $(DBMATE) up
-
-# Seed commands
-seed:
-	@echo "Seeding database with sample companies..."
-	go run cmd/seed/main.go
-
-seed-clear:
-	@echo "Clearing seed data from database..."
-	go run cmd/seed/main.go --clear

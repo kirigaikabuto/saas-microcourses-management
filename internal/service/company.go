@@ -30,18 +30,22 @@ func NewCompanyService(pool *pgxpool.Pool) *CompanyService {
 
 func (s *CompanyService) CreateCompany(ctx context.Context, req *companyv1.CreateCompanyRequest) (*companyv1.CreateCompanyResponse, error) {
 	if req.Name == "" {
-		return nil, status.Error(codes.InvalidArgument, "name is required")
+		return nil, status.Error(codes.InvalidArgument, ErrCompanyNameRequired)
 	}
 	if req.SubscriptionPlan == "" {
-		return nil, status.Error(codes.InvalidArgument, "subscription_plan is required")
+		return nil, status.Error(codes.InvalidArgument, ErrCompanySubscriptionRequired)
 	}
 
 	company, err := s.queries.CreateCompany(ctx, db.CreateCompanyParams{
+		ID: pgtype.UUID{
+			Bytes: uuid.New(),
+			Valid: true,
+		},
 		Name:             pgtype.Text{String: req.Name, Valid: true},
 		SubscriptionPlan: pgtype.Text{String: req.SubscriptionPlan, Valid: true},
 	})
 	if err != nil {
-		return nil, status.Error(codes.Internal, "failed to create company")
+		return nil, status.Error(codes.Internal, ErrFailedToCreateCompany)
 	}
 
 	return &companyv1.CreateCompanyResponse{
@@ -51,13 +55,13 @@ func (s *CompanyService) CreateCompany(ctx context.Context, req *companyv1.Creat
 
 func (s *CompanyService) GetCompany(ctx context.Context, req *companyv1.GetCompanyRequest) (*companyv1.GetCompanyResponse, error) {
 	if req.Id == "" {
-		return nil, status.Error(codes.InvalidArgument, "id is required")
+		return nil, status.Error(codes.InvalidArgument, ErrCompanyIDRequired)
 	}
 
 	// Parse UUID
 	uuidParsed, err := uuid.Parse(req.Id)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, "invalid UUID format")
+		return nil, status.Error(codes.InvalidArgument, ErrInvalidUUIDFormat)
 	}
 
 	var uuidParam pgtype.UUID
@@ -67,9 +71,9 @@ func (s *CompanyService) GetCompany(ctx context.Context, req *companyv1.GetCompa
 	company, err := s.queries.GetCompany(ctx, uuidParam)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, status.Error(codes.NotFound, "company not found")
+			return nil, status.Error(codes.NotFound, ErrCompanyNotFound)
 		}
-		return nil, status.Error(codes.Internal, "failed to get company")
+		return nil, status.Error(codes.Internal, ErrFailedToGetCompany)
 	}
 
 	return &companyv1.GetCompanyResponse{
@@ -79,13 +83,13 @@ func (s *CompanyService) GetCompany(ctx context.Context, req *companyv1.GetCompa
 
 func (s *CompanyService) UpdateCompany(ctx context.Context, req *companyv1.UpdateCompanyRequest) (*companyv1.UpdateCompanyResponse, error) {
 	if req.Id == "" {
-		return nil, status.Error(codes.InvalidArgument, "id is required")
+		return nil, status.Error(codes.InvalidArgument, ErrCompanyIDRequired)
 	}
 
 	// Parse UUID
 	uuidParsed, err := uuid.Parse(req.Id)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, "invalid UUID format")
+		return nil, status.Error(codes.InvalidArgument, ErrInvalidUUIDFormat)
 	}
 
 	arg := db.UpdateCompanyParams{
@@ -106,9 +110,9 @@ func (s *CompanyService) UpdateCompany(ctx context.Context, req *companyv1.Updat
 	company, err := s.queries.UpdateCompany(ctx, arg)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, status.Error(codes.NotFound, "company not found")
+			return nil, status.Error(codes.NotFound, ErrCompanyNotFound)
 		}
-		return nil, status.Error(codes.Internal, "failed to update company "+err.Error())
+		return nil, status.Error(codes.Internal, ErrFailedToUpdateCompany)
 	}
 
 	return &companyv1.UpdateCompanyResponse{
@@ -118,13 +122,13 @@ func (s *CompanyService) UpdateCompany(ctx context.Context, req *companyv1.Updat
 
 func (s *CompanyService) DeleteCompany(ctx context.Context, req *companyv1.DeleteCompanyRequest) (*companyv1.DeleteCompanyResponse, error) {
 	if req.Id == "" {
-		return nil, status.Error(codes.InvalidArgument, "id is required")
+		return nil, status.Error(codes.InvalidArgument, ErrCompanyIDRequired)
 	}
 
 	// Parse UUID
 	uuidParsed, err := uuid.Parse(req.Id)
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, "invalid UUID format")
+		return nil, status.Error(codes.InvalidArgument, ErrInvalidUUIDFormat)
 	}
 
 	var uuidParam pgtype.UUID
@@ -133,7 +137,7 @@ func (s *CompanyService) DeleteCompany(ctx context.Context, req *companyv1.Delet
 
 	err = s.queries.DeleteCompany(ctx, uuidParam)
 	if err != nil {
-		return nil, status.Error(codes.Internal, "failed to delete company")
+		return nil, status.Error(codes.Internal, ErrFailedToDeleteCompany)
 	}
 
 	return &companyv1.DeleteCompanyResponse{
@@ -162,12 +166,12 @@ func (s *CompanyService) ListCompanies(ctx context.Context, req *companyv1.ListC
 		Offset: offset,
 	})
 	if err != nil {
-		return nil, status.Error(codes.Internal, "failed to list companies")
+		return nil, status.Error(codes.Internal, ErrFailedToListCompanies)
 	}
 
 	total, err := s.queries.CountCompanies(ctx)
 	if err != nil {
-		return nil, status.Error(codes.Internal, "failed to count companies")
+		return nil, status.Error(codes.Internal, ErrFailedToCountCompanies)
 	}
 
 	pbCompanies := make([]*companyv1.Company, len(companies))

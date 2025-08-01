@@ -1,6 +1,6 @@
 -- name: CreateCompany :one
-INSERT INTO companies (name, subscription_plan)
-VALUES ($1, $2)
+INSERT INTO companies (id, name, subscription_plan, created_at, updated_at)
+VALUES ($1, $2, $3, NOW(), NOW())
 RETURNING id, name, subscription_plan, created_at, updated_at;
 
 -- name: GetCompany :one
@@ -10,15 +10,15 @@ WHERE id = $1;
 
 -- name: UpdateCompany :one
 UPDATE companies
-SET
-    name = COALESCE($2, name),
+SET name              = COALESCE($2, name),
     subscription_plan = COALESCE($3, subscription_plan),
-    updated_at = NOW()
+    updated_at        = NOW()
 WHERE id = $1
 RETURNING id, name, subscription_plan, created_at, updated_at;
 
 -- name: DeleteCompany :exec
-DELETE FROM companies
+DELETE
+FROM companies
 WHERE id = $1;
 
 -- name: ListCompanies :many
@@ -28,4 +28,5 @@ ORDER BY created_at DESC
 LIMIT $1 OFFSET $2;
 
 -- name: CountCompanies :one
-SELECT COUNT(*) FROM companies;
+SELECT COUNT(*)
+FROM companies;
